@@ -13,7 +13,7 @@ function App() {
             <Header title = 'REACT Pet Adoption'/> 
             <Button title = 'Customer Login' onClick = {() => setBtnToggle(1)}/> {/*Clicking this button will change webpage to 'Customer State'*/}
             <Button title = 'Employee Login' onClick = {() => setBtnToggle(2)}/> {/*Clicking this button will change webpage to 'Employee State'*/}
-            <div className="logo-container">                                     {/*(Each state will display the associated database view for that profile type)*/}
+            <div className="logo-container">                                     {/*(Each state will display the associated database view*/}
               <img src = {pets} className = "pet-logo" alt =""/>
             </div>
           </div>
