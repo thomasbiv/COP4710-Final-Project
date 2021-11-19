@@ -22,7 +22,7 @@ function App() {
         : btnToggle === 1
         ? <div>
             <div className = "form-box">
-            render() {
+            {
             CustomerLoginForm()
             }   
             </div>
@@ -33,7 +33,7 @@ function App() {
         :
           <div>
             <div className="form-box">
-            render() {
+            {
             EmployeeLoginForm()
             } 
             </div>
