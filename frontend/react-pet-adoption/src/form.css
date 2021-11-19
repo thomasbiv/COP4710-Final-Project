@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.form-box{
+    padding-left: 30%;
+    padding-right: 30%;
+  }
+
+  .form-box input, text {
+    width: 60%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .2vw 0 ;
+    border:0;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+.form-box label {
+    font-size: 30px;
+    text-align: left;
+}
