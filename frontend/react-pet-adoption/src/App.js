@@ -9,22 +9,53 @@ import {useState} from 'react'
 
 function App() {
   const [btnToggle, setBtnToggle] = useState(0);
-  const [customerId, setCustomerId] = useState("")
+  const [customerId, setCustomerId] = useState()
   const [password, setPassword] = useState("")
-  const [RegCustomerId, setCustId] = useState("")
+  const [regCustomerId, setCustId] = useState()
   const [firstName, setFirst] = useState("")
   const [lastName, setLast] = useState("")
   const [phone, setPhone] = useState()
   const [email, setEmail] = useState("")
   const [address, setAddress] = useState("")
-  const [regPassword, setRegPassword] = useState("")
+  const [regPassword, setRegPassword] = useState()
+  const [loginStatus, setLoginStatus] = useState("")
+  const [empId, setEmpId] = useState("")
+  const [empPassword, setEmpPassword] = useState("")
 
-  const login = () => {
-    axios.post("http://localhost:4000/customerLogin", {customerId: customerId, password: password}).then(() => {alert("it works")})
+  const login = async () => {
+    setLoginStatus(null)
+    if(customerId )
+    axios.post("http://localhost:4000/customerLogin", {customerId: customerId, password: password}).then((response) => {
+          if(response.data.message)
+          {
+            setLoginStatus(response.data.message)
+          } else 
+          {
+            setLoginStatus("Hello, " + response.data[0].firstname)
+            setBtnToggle(4)
+          }
+    })
   }
 
   const register = () => {
-    axios.post("http://localhost:4000/customerRegister", {RegCustomerId: RegCustomerId, firstName: firstName, lastName: lastName, phone: phone, email: email, address: address, regPassword: regPassword}).then(() => {alert("it works")})
+    axios.post("http://localhost:4000/customerRegister", {regCustomerId: regCustomerId, firstName: firstName, lastName: lastName, phone: phone, email: email, address: address, regPassword: regPassword}).then((response) => {
+    if(response.data.message === "success")  
+      setBtnToggle(4)
+    })
+  }
+
+  const empLogin = async () => {
+    setLoginStatus(null)
+    axios.post("http://localhost:4000/employeeLogin", {empId: empId, empPassword: empPassword}).then((response) => {
+      if(response.data.message)
+      {
+        setLoginStatus(response.data.message)
+      } else 
+      {
+        setLoginStatus("Hello, " + response.data[0].firstname)
+        setBtnToggle(5)
+      }
+    })
   }
 
   return (
@@ -41,28 +72,24 @@ function App() {
         : btnToggle === 1
         ? <div>
             <div className = "form-box">
-            <form>
             <label>Welcome Customer!</label>
             <br/>
-            <input type="text" placeholder="Customer ID" onChange={(e) => {setCustomerId(e.target.value)}}/>
+            <input type="text" placeholder="Customer ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setCustomerId(e.target.value)}}/>
             <br/>
             <input type="text" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
             <br/>
-            <button onClick={login} className = 'btn'> Login</button>
+            <button onClick={() => login()} className = 'btn'> Login</button>
             <button className = "btn" onClick = {() => setBtnToggle(3)}>Register</button>
-            </form> 
             </div>
-            Customer database view is displayed here! (Available Pets (and their medical issues), Pets foster condition, etc.)
             <br/>
             <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
           </div>
         : btnToggle === 3
         ? <div>
           <div className = "form-box">
-          <form>
             <label>Welcome New Customer!</label>
             <br/>
-            <input type="text" placeholder="Customer ID" onChange={(e) => {setCustId(e.target.value)}}/>
+            <input type="text" placeholder="Customer ID" pattern = "[0-9]*" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setCustId(e.target.value)}}/>
             <br/>
             <input type="text" placeholder="First Name" onChange={(e) => {setFirst(e.target.value)}}/>
             <br/>
@@ -70,27 +97,43 @@ function App() {
             <br/>
             <input type="text" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}}/>
             <br/>
-            <input type="text" placeholder="Phone Number" onChange={(e) => {setPhone(e.target.value)}}/>
+            <input type="text" placeholder="Phone Number" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPhone(e.target.value)}}/>
             <br/>
             <input type="text" placeholder="Address" onChange={(e) => {setAddress(e.target.value)}}/>
             <br/>
             <input type="text" placeholder="Password" onChange={(e) => {setRegPassword(e.target.value)}}/>
             <br/>
-            <button onClick={register} className = 'btn'> Register</button>
-            </form> 
+            <button onClick={register} className = 'btn'> Register</button> 
         </div>
-        Customer database view is displayed here! (Available Pets (and their medical issues), Pets foster condition, etc.)
         <br/>
         <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
       </div>
-        :
-          <div>
+      : btnToggle === 4
+      ? <div>
+        <h1>{loginStatus}</h1>
+        <br/>
+        This is the customer view
+        <br/>
+        <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
+        </div>
+      : btnToggle === 5
+      ? <div>
+        <h1>{loginStatus}</h1>
+        <br/>
+        This is the employee view
+        <br/>
+        <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
+        </div>
+        : <div>
             <div className="form-box">
-            {
-            EmployeeLoginForm()
-            } 
+            <label>Welcome Employee!</label>
+            <br/>
+            <input type="text" placeholder="Employee ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setEmpId(e.target.value)}}/>
+            <br/>
+            <input type="text" placeholder="Password" onChange={(e) => {setEmpPassword(e.target.value)}}/>
+            <br/>
+            <button className = "btn" onClick={empLogin}> Login </button>
             </div>
-            <div>Employee database view is displayed here! (Pets (and their medical issues), Employee Info, Customer Info, etc.)</div>
             <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
           </div>
       } 
@@ -98,20 +141,4 @@ function App() {
   );
 }
 
-
-
-function EmployeeLoginForm() {
-
-  return (
-    <form>
-      <label>Welcome Employee!</label>
-      <br/>
-      <input type="text" name="employeeId" placeholder="Employee ID"/>
-      <br/>
-      <input type="text" name="employeePassword" placeholder="Password"/>
-      <br/>
-      <input type="submit" value="Submit" className = "btn"/>
-    </form>
-    )
-}
 export default App;
