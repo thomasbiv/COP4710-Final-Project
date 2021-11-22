@@ -22,13 +22,18 @@ function App() {
   const [empId, setEmpId] = useState("")
   const [empPassword, setEmpPassword] = useState("")
 
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  }
+
   const login = async () => {
     setLoginStatus(null)
     if(customerId )
     axios.post("http://localhost:4000/customerLogin", {customerId: customerId, password: password}).then((response) => {
           if(response.data.message)
           {
-            setLoginStatus(response.data.message)
+            alert("Incorrect ID or password, please try again.")
           } else 
           {
             setLoginStatus("Hello, " + response.data[0].firstname)
@@ -49,7 +54,7 @@ function App() {
     axios.post("http://localhost:4000/employeeLogin", {empId: empId, empPassword: empPassword}).then((response) => {
       if(response.data.message)
       {
-        setLoginStatus(response.data.message)
+        alert("Incorrect ID or password, please try again.")
       } else 
       {
         setLoginStatus("Hello, " + response.data[0].firstname)
@@ -76,7 +81,9 @@ function App() {
             <br/>
             <input type="text" placeholder="Customer ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setCustomerId(e.target.value)}}/>
             <br/>
-            <input type="text" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
+            <input type={passwordShown ? "tex" : "password"} placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
+            <br/>
+            <button onClick={togglePassword} className = "btn"> Show Password</button>
             <br/>
             <button onClick={() => login()} className = 'btn'> Login</button>
             <button className = "btn" onClick = {() => setBtnToggle(3)}>Register</button>
@@ -130,7 +137,9 @@ function App() {
             <br/>
             <input type="text" placeholder="Employee ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setEmpId(e.target.value)}}/>
             <br/>
-            <input type="text" placeholder="Password" onChange={(e) => {setEmpPassword(e.target.value)}}/>
+            <input type={passwordShown ? "tex" : "password"} placeholder="Password" onChange={(e) => {setEmpPassword(e.target.value)}}/>
+            <br/>
+            <button onClick={togglePassword} className = "btn"> Show Password</button>
             <br/>
             <button className = "btn" onClick={empLogin}> Login </button>
             </div>

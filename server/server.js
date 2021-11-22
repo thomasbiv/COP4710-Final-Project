@@ -27,7 +27,7 @@ app.post("/customerLogin", (req, res) => {
             res.send(result.rows)
         } else 
         {
-            res.send({message: "Incorrect ID or password, please try again"})
+            res.send({message: "incorrect"})
         }
     })
     client.end;
@@ -64,7 +64,7 @@ app.post("/employeeLogin", (req, res) => {
             res.send(result.rows)
         } else 
         {
-            res.send({message: "Incorrect ID or password, please try again"})
+            res.send({message: "incorrect"})
         }
         
     })
