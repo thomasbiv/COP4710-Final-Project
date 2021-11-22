@@ -19,7 +19,6 @@ app.post("/customerLogin", (req, res) => {
     const password = req.body.password
     client.query(`SELECT * FROM customer WHERE customerid = ${customerId} AND "password" = '${password}'`,
     (err, result) => {
-        console.log(result)
         if(err) 
         {
             console.log(err)
