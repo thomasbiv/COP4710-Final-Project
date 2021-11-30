@@ -15,7 +15,7 @@ const client  = new Client({
     user: "postgres",
     port: 5432,
     password: "password",
-    database: "animalShelter"
+    database: "animalshelter"
 })
 
 client.connect();
@@ -54,7 +54,53 @@ app.get("/customerRegister", (req, res) => {
     })
     client.end;
 })
+/*
+// only accessible to employees
+app.get("/allDogs", async (req, res) => {
+    try {
+        const allDogs = await client.query("SELECT * FROM Pets NATURAL JOIN Dogs");
 
+        res.json(allDogs.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// only accessible to employees
+app.get("/allCats", async (req, res) => {
+    try {
+        const allCats = await client.query("SELECT * FROM Pets NATURAL JOIN Cats");
+
+        res.json(allCats.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// only accessible to customers
+// exclude --> RescDate, AdoptedBy, AdoptionDate
+app.get("/someDogs", async (req, res) => {
+    try {
+        const someDogs = await client.query("SELECT PetID, Name, Color, Status, Sex, MChipped, Breed, Shots, Weight, EstDOB, CoatLength, Fixed, HouseTrained FROM Pets NATURAL JOIN Dogs");
+
+        res.json(someDogs.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// only accessible to customers
+// exclude --> RescDate, AdoptedBy, AdoptionDate
+app.get("/someCats", async (req, res) => {
+    try {
+        const someCats = await client.query("SELECT PetID, Name, Color, Status, Sex, MChipped, Breed, Shots, Weight, EstDOB, CoatLength, Fixed, DeClawed FROM Pets NATURAL JOIN Cats");
+
+        res.json(someCats.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+*/
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 })

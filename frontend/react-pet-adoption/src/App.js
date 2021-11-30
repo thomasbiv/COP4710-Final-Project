@@ -38,6 +38,19 @@ function App() {
   const [petId, setPetId] = useState()
   const [adoptCustId, setAdoptCustId] = useState()
 
+  //add a new pet ; status is set to 'available' when inserting to table
+  const [pID, setPetPID] = useState(0)
+  const [name, setPetName] = useState("")
+  const [color, setPetColor] = useState("")
+  const [sex, setPetSex] = useState("")
+  const [mChipped, setPetMchipped] = useState(false)
+  const [breed, setPetBreed] = useState("")
+  const [shots, setPetShots] = useState(false)
+  const [weight, setPetWeight] = useState(0)
+  const [rescDate, setPetRescDate] = useState()
+  const [estDOB, setPetEstDOB] = useState()
+  const [coatLength, setPetCoatLength] = useState("")
+  const [fixed, setPetFixed] = useState(false)
 
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -86,7 +99,7 @@ function App() {
     })
   }, []);
 
-  useEffect(() => {//eployee view
+  useEffect(() => {//employee view
     axios.get("http://localhost:4000/employeeView", {}).then((response) => {
       setEmployeeView(response.data)
     })
@@ -95,6 +108,13 @@ function App() {
 
   const facilitateAdoption = () => {
     axios.post("http://localhost:4000/facilitateAdoption", {petId: petId, adoptCustId: adoptCustId}).then((response) => {
+    if(response.data.message === "success")  
+      setBtnToggle(5)
+    })
+  }
+
+  const addPet = () => {
+    axios.post("http://localhost:4000/addPet", {pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
     })
@@ -183,7 +203,58 @@ function App() {
         </div>
         : btnToggle === 6
         ? <div>
-          Add new pet
+          <div className="form-box">
+            <label>Add a new pet</label>
+            <br />
+            <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPetPID(e.target.value)}}/>
+            <br/>
+            <input type="text" placeholder="Pet Name" onChange={(e) => {setPetName(e.target.value)}}/>
+            <br/>
+            <input type="text" placeholder="Color" onChange={(e) => {setPetColor(e.target.value)}}/>
+            <br />
+            <input type="text" placeholder="Breed" onChange={(e) => {setPetBreed(e.target.value)}}/>
+            <br />
+            <input type="text" placeholder="Weight (lbs)" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPetWeight(e.target.value)}}/>
+            <br/>
+            <label>Rescued On</label>
+            <input type="date" onKeyPress={(e) => {setPetRescDate(e.target.value)}}/>
+            <br />
+            <label>Estimated DOB</label>
+            <input type="date" onKeyPress={(e) => {setPetEstDOB(e.target.value)}}/>
+            <br />
+            <label>sex</label>
+            <select>
+              <option value="M" onChange={(e) => {setPetSex(e.target.value)}}>Male</option>
+              <option value="F" onChange={(e) => {setPetSex(e.target.value)}}>Female</option>
+            </select>
+            <br />
+            <label>MicroChipped</label>
+            <select>
+              <option value="true" onChange={(e) => setPetMchipped(e.target.value)}>Yes</option>
+              <option value="false" onChange={(e) => setPetMchipped(e.target.value)}>No</option>
+            </select>
+            <br />
+            <label>Shots Received</label>
+            <select>
+              <option value="true" onChange={(e) => setPetShots(e.target.value)}>Yes</option>
+              <option value="false" onChange={(e) => setPetShots(e.target.value)}>No</option>
+            </select>
+            <br />
+            <label>Fixed</label>
+            <select>
+              <option value="true" onChange={(e) => setPetFixed(e.target.value)}>Yes</option>
+              <option value="false" onChange={(e) => setPetFixed(e.target.value)}>No</option>
+            </select>
+            <br />
+            <label>Coat Length</label>
+            <select>
+              <option value="short" onChange={(e) => setPetCoatLength(e.target.value)}>Short</option>
+              <option value="medium" onChange={(e) => setPetCoatLength(e.target.value)}>Medium</option>
+              <option value="long" onChange={(e) => setPetCoatLength(e.target.value)}>Long</option>
+            </select>
+            <br />
+            <button className = "btn" onClick={addPet}> Add Pet </button>
+            </div>
           <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
           <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
           </div>

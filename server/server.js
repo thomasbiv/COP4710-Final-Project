@@ -112,3 +112,26 @@ app.post("/facilitateAdoption", (req, res) => {
     })
     client.end;
 })
+
+app.post("/addPet", (req, res) => {
+    const pID = req.body.pId
+    const name = req.body.name
+    const color = req.body.color
+    const sex = req.body.sex
+    const mChipped = req.body.mChipped
+    const breed = req.body.breed
+    const shots = req.body.shots
+    const weight = req.body.weight
+    const rescDate = req.body.rescDate
+    const estDOB = req.body.resDate
+    const coatLength = req.body.coatLength
+    const fixed = req.body.fixed
+    client.query(`INSERT INTO Pets(PetID, Name, Status, Color, Sex, MChipped, Breed, Shots, Weight, RescDate, EstDOB, CoatLength, Fixed) VALUES(${pId}, ${name}, 'Available', ${color}, ${sex}, ${mChipped}, ${breed}, ${shots}, ${weight}, ${rescDate}, ${estDOB}, ${coatLength}, ${fixed})`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
+    })
+    client.end;
+})
