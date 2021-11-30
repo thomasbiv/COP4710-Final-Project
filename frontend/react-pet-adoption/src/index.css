@@ -20,6 +20,17 @@ body {
     font-family: inherit;
   }
 
+  .hr {
+    color: black;
+    width: 80%;
+    background-color: black;
+    height: 3px;
+    border-color: black;
+    align-items: center;
+    margin-left: 10%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

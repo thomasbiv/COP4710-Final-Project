@@ -6,6 +6,7 @@ import axios from 'axios'
 import './form.css'
 import './App.css'
 import {useState} from 'react'
+import {useEffect} from 'react'
 
 function App() {
   const [btnToggle, setBtnToggle] = useState(0);
@@ -21,6 +22,7 @@ function App() {
   const [loginStatus, setLoginStatus] = useState("")
   const [empId, setEmpId] = useState("")
   const [empPassword, setEmpPassword] = useState("")
+  const [displayCustomerView, setcustomerView] = useState([])
 
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -62,6 +64,12 @@ function App() {
       }
     })
   }
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/customerView", {}).then((response) => {
+      setcustomerView(response.data)
+    })
+  }, []);
 
   return (
     <div className="App">
@@ -119,9 +127,14 @@ function App() {
       ? <div>
         <h1>{loginStatus}</h1>
         <br/>
-        This is the customer view
+        These are the pets that we currently have available
         <br/>
-        <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
+        <hr className = "hr"/>
+        {displayCustomerView.map((val) => {
+            return <h4> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | coatlength: {val.coatlength} | Weight: {val.weight} | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+        })}
+        <br/>
+        <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
         </div>
       : btnToggle === 5
       ? <div>
@@ -129,7 +142,7 @@ function App() {
         <br/>
         This is the employee view
         <br/>
-        <Button title = 'Back' onClick = {() => setBtnToggle(0)}/>
+        <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
         </div>
         : <div>
             <div className="form-box">

@@ -70,3 +70,18 @@ app.post("/employeeLogin", (req, res) => {
     })
     client.end;
 })
+
+app.get("/customerView", (req, res) => {
+    client.query(`SELECT name, color, sex, mchipped, breed, shots, weight, rescdate, DATE_PART('year', AGE(estdob)) as age, coatlength, fixed FROM pets WHERE adoptedBY IS NULL`,
+    (err, result) => {
+        if(err) 
+        {
+            console.log(err)
+        } else 
+        {
+            res.send(result.rows)
+        }
+
+    })
+    client.end;
+})
