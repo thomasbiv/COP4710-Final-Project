@@ -72,7 +72,7 @@ app.post("/employeeLogin", (req, res) => {
 })
 
 app.get("/customerView", (req, res) => {
-    client.query(`SELECT name, color, sex, mchipped, breed, shots, weight, rescdate, DATE_PART('year', AGE(estdob)) as age, coatlength, fixed FROM pets WHERE adoptedBY IS NULL`,
+    client.query(`SELECT * FROM customerView`,
     (err, result) => {
         if(err) 
         {
@@ -82,6 +82,33 @@ app.get("/customerView", (req, res) => {
             res.send(result.rows)
         }
 
+    })
+    client.end;
+})
+
+app.get("/employeeView", (req, res) => {
+    client.query(`SELECT * FROM employeeView`,
+    (err, result) => {
+        if(err) 
+        {
+            console.log(err)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
+
+app.post("/facilitateAdoption", (req, res) => {
+    const petId = req.body.petId
+    const adoptCustId = req.body.adoptCustId
+    client.query(`UPDATE pets SET status = 'Adopted', adoptedby = ${adoptCustId}, adoptiondate = NOW() WHERE petid = ${petId}`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
     })
     client.end;
 })

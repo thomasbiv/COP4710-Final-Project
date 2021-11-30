@@ -22,16 +22,18 @@ body {
 
   .hr {
     color: black;
-    width: 80%;
+    width: 90%;
     background-color: black;
     height: 3px;
     border-color: black;
     align-items: center;
-    margin-left: 10%;
     margin-top: 5px;
     margin-bottom: 5px;
   }
-
+  .leftAlign {
+    text-align: left;
+    margin-left: 10%;
+  }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

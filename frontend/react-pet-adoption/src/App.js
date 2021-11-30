@@ -10,8 +10,11 @@ import {useEffect} from 'react'
 
 function App() {
   const [btnToggle, setBtnToggle] = useState(0);
+  //customer login
   const [customerId, setCustomerId] = useState()
   const [password, setPassword] = useState("")
+
+  //customer registration
   const [regCustomerId, setCustId] = useState()
   const [firstName, setFirst] = useState("")
   const [lastName, setLast] = useState("")
@@ -20,9 +23,21 @@ function App() {
   const [address, setAddress] = useState("")
   const [regPassword, setRegPassword] = useState()
   const [loginStatus, setLoginStatus] = useState("")
+
+  //employee login
   const [empId, setEmpId] = useState("")
   const [empPassword, setEmpPassword] = useState("")
-  const [displayCustomerView, setcustomerView] = useState([])
+
+  //customer view
+  const [displayCustomerView, setCustomerView] = useState([])
+
+  //employee view
+  const [displayEmployeeView, setEmployeeView] = useState([])
+
+  //facilitate adoption
+  const [petId, setPetId] = useState()
+  const [adoptCustId, setAdoptCustId] = useState()
+
 
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -65,11 +80,25 @@ function App() {
     })
   }
 
-  useEffect(() => {
+  useEffect(() => {//customer view
     axios.get("http://localhost:4000/customerView", {}).then((response) => {
-      setcustomerView(response.data)
+      setCustomerView(response.data)
     })
   }, []);
+
+  useEffect(() => {//eployee view
+    axios.get("http://localhost:4000/employeeView", {}).then((response) => {
+      setEmployeeView(response.data)
+    })
+  }, []);
+
+
+  const facilitateAdoption = () => {
+    axios.post("http://localhost:4000/facilitateAdoption", {petId: petId, adoptCustId: adoptCustId}).then((response) => {
+    if(response.data.message === "success")  
+      setBtnToggle(5)
+    })
+  }
 
   return (
     <div className="App">
@@ -129,9 +158,9 @@ function App() {
         <br/>
         These are the pets that we currently have available
         <br/>
-        <hr className = "hr"/>
+        <br/>
         {displayCustomerView.map((val) => {
-            return <h4> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | coatlength: {val.coatlength} | Weight: {val.weight} | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -140,10 +169,39 @@ function App() {
       ? <div>
         <h1>{loginStatus}</h1>
         <br/>
-        This is the employee view
-        <br/>
+        <Button title = 'Add New Pet' onClick = {() => setBtnToggle(6)}/>
+        <Button title = 'Facilitate Adoption' onClick = {() => setBtnToggle(7)}/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+        <br/>
+        <br/>
+        {displayEmployeeView.map((val) => {
+          if (val.status === "available" || val.status === "Available")
+            return <h5 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h5>
+          else 
+            return <h5 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Adopted By: {val.adoptedby} | Adoption Date: {val.adoptmonth}-{val.adoptday}-{val.adoptyear} <hr className = "hr"/></h5>
+        })}
         </div>
+        : btnToggle === 6
+        ? <div>
+          Add new pet
+          <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
+          <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+          </div>
+        : btnToggle === 7
+        ? <div>
+          <div className="form-box">
+            <label>Facilitate an Adoption</label>
+            <br/>
+            <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPetId(e.target.value)}}/>
+            <br/>
+            <input type="text" placeholder="Customer ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setAdoptCustId(e.target.value)}}/>
+            <br/>
+            <button className = "btn" onClick={facilitateAdoption}> Complete Adoption </button>
+            </div>
+          <br/>
+          <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
+          <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+          </div>
         : <div>
             <div className="form-box">
             <label>Welcome Employee!</label>
