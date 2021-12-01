@@ -42,13 +42,13 @@ function App() {
   const [pID, setPetPID] = useState(0)
   const [name, setPetName] = useState("")
   const [color, setPetColor] = useState("")
-  const [sex, setPetSex] = useState("")
+  const [sex, setPetSex] = useState()
   const [mChipped, setPetMchipped] = useState(false)
   const [breed, setPetBreed] = useState("")
   const [shots, setPetShots] = useState(false)
   const [weight, setPetWeight] = useState(0)
-  const [rescDate, setPetRescDate] = useState()
-  const [estDOB, setPetEstDOB] = useState()
+  const [rescDate, setPetRescDate] = useState(new Date())
+  const [estDOB, setPetEstDOB] = useState(new Date())
   const [coatLength, setPetCoatLength] = useState("")
   const [fixed, setPetFixed] = useState(false)
 
@@ -216,17 +216,15 @@ function App() {
             <br />
             <input type="text" placeholder="Weight (lbs)" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPetWeight(e.target.value)}}/>
             <br/>
+            <input type="text" placeholder="Sex (M/F)" onChange={(e) => {setPetSex(e.target.value)}}/>
+            <br />
             <label>Rescued On</label>
-            <input type="date" onKeyPress={(e) => {setPetRescDate(e.target.value)}}/>
+            <br/>
+            <input type="date" onChange={(e) => {setPetRescDate(e.target.value)}}/>
             <br />
             <label>Estimated DOB</label>
-            <input type="date" onKeyPress={(e) => {setPetEstDOB(e.target.value)}}/>
-            <br />
-            <label>sex</label>
-            <select>
-              <option value="M" onChange={(e) => {setPetSex(e.target.value)}}>Male</option>
-              <option value="F" onChange={(e) => {setPetSex(e.target.value)}}>Female</option>
-            </select>
+            <br/>
+            <input type="date" onChange={(e) => {setPetEstDOB(e.target.value)}}/>
             <br />
             <label>MicroChipped</label>
             <select>

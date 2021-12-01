@@ -20,3 +20,10 @@
     font-size: 30px;
     text-align: left;
 }
+
+.form-box option, select {
+  Height: 30px;
+  width: 80px;
+  border-radius: 5px;
+  margin: 10px;
+}

@@ -123,10 +123,10 @@ app.post("/addPet", (req, res) => {
     const shots = req.body.shots
     const weight = req.body.weight
     const rescDate = req.body.rescDate
-    const estDOB = req.body.resDate
+    const estDOB = req.body.estDOB
     const coatLength = req.body.coatLength
     const fixed = req.body.fixed
-    client.query(`INSERT INTO Pets(PetID, Name, Status, Color, Sex, MChipped, Breed, Shots, Weight, RescDate, EstDOB, CoatLength, Fixed) VALUES(${pId}, ${name}, 'Available', ${color}, ${sex}, ${mChipped}, ${breed}, ${shots}, ${weight}, ${rescDate}, ${estDOB}, ${coatLength}, ${fixed})`,
+    client.query(`INSERT INTO Pets(petid, name, status, color, sex, mchipped, breed, shots, weight, rescdate, estdob, coatlength, fixed) VALUES(${pID}, '${name}', 'Available', '${color}', '${sex}', ${mChipped}, '${breed}', ${shots}, ${weight},'${rescDate}', '${estDOB}', '${coatLength}', ${fixed});`,
     (err, result) => {
         if(err)
         console.log(err.message)
