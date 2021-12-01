@@ -55,6 +55,16 @@ function App() {
   //delete pet
   const[deletePetId, setDeletePetId] = useState(0)
 
+  //filter by age
+  const[filterByAge, setFilterByAge] = useState([])
+
+  //filter cats
+  const[filterCats, setFilterCats] = useState([])
+
+
+  //filter dogs
+  const[filterDogs, setFilterDogs] = useState([])
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -129,6 +139,23 @@ function App() {
       setBtnToggle(5)
     })
   }
+  useEffect(() => {//filtered by age
+    axios.get("http://localhost:4000/filterByAge", {}).then((response) => {
+      setFilterByAge(response.data)
+    })
+  }, []);
+
+  useEffect(() => {//cats
+    axios.get("http://localhost:4000/filterCats", {}).then((response) => {
+      setFilterCats(response.data)
+    })
+  }, []);
+
+  useEffect(() => {//dogs
+    axios.get("http://localhost:4000/filterDogs", {}).then((response) => {
+      setFilterDogs(response.data)
+    })
+  }, []);
 
   return (
     <div className="App">
@@ -188,8 +215,67 @@ function App() {
         <br/>
         These are the pets that we currently have available
         <br/>
+        <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
+        <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
+        <Button title = 'Dogs' onClick = {() => setBtnToggle(11)}/>
+        <Button title = 'Reset Filters' onClick = {() => setBtnToggle(4)}/>
+        <br/>
         <br/>
         {displayCustomerView.map((val) => {
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+        })}
+        <br/>
+        <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+        </div>
+      : btnToggle === 9
+      ? <div>
+        <h1>{loginStatus}</h1>
+        <br/>
+        These are the pets that we currently have available
+        <br/>
+        <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
+        <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
+        <Button title = 'Dogs' onClick = {() => setBtnToggle(11)}/>
+        <Button title = 'Reset Filters' onClick = {() => setBtnToggle(4)}/>
+        <br/>
+        <br/>
+        {filterByAge.map((val) => {
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+        })}
+        <br/>
+        <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+        </div>
+      : btnToggle === 10
+      ? <div>
+        <h1>{loginStatus}</h1>
+        <br/>
+        These are the pets that we currently have available
+        <br/>
+        <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
+        <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
+        <Button title = 'Dogs' onClick = {() => setBtnToggle(11)}/>
+        <Button title = 'Reset Filters' onClick = {() => setBtnToggle(4)}/>
+        <br/>
+        <br/>
+        {filterCats.map((val) => {
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+        })}
+        <br/>
+        <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+        </div>
+      : btnToggle === 11
+      ? <div>
+        <h1>{loginStatus}</h1>
+        <br/>
+        These are the pets that we currently have available
+        <br/>
+        <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
+        <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
+        <Button title = 'Dogs' onClick = {() => setBtnToggle(11)}/>
+        <Button title = 'Reset Filters' onClick = {() => setBtnToggle(4)}/>
+        <br/>
+        <br/>
+        {filterDogs.map((val) => {
             return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
         })}
         <br/>

@@ -147,3 +147,45 @@ app.post("/deletePet", (req, res) => {
     })
     client.end;
 })
+
+app.get("/filterByAge", (req, res) => {
+    client.query(`SELECT * FROM customerView ORDER BY age asc`,
+    (err, result) => {
+        if(err) 
+        {
+            console.log(err)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
+
+app.get("/filterCats", (req, res) => {
+    client.query(`SELECT * FROM customerView, cats  WHERE customerView.petid = cats.petid`,
+    (err, result) => {
+        if(err) 
+        {
+            console.log(err)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
+
+app.get("/filterDogs", (req, res) => {
+    client.query(`SELECT * FROM customerView, dogs WHERE customerView.petid = dogs.petid`,
+    (err, result) => {
+        if(err) 
+        {
+            console.log(err)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
