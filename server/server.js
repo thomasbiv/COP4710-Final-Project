@@ -189,3 +189,30 @@ app.get("/filterDogs", (req, res) => {
     })
     client.end;
 })
+
+app.post("/addMedicalCondition", (req, res) => {
+    const issue = req.body.issue
+    const pet = req.body.pet
+    const medications = req.body.medications
+    const extracareneeded = req.body.extracareneeded
+    client.query(`INSERT INTO MedicalIssues(issue, pet, medications, extracareneeded) VALUES ('${issue}', ${pet}, '${medications}', ${extracareneeded})`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
+    })
+    client.end;
+})
+
+app.post("/deleteMedCondition", (req, res) => {
+    const deleteMedPetID = req.body.deleteMedPetID
+    client.query(`DELETE FROM MedicalIssues WHERE pet = ${deleteMedPetID}`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
+    })
+    client.end;
+})
