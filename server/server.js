@@ -135,3 +135,15 @@ app.post("/addPet", (req, res) => {
     })
     client.end;
 })
+
+app.post("/deletePet", (req, res) => {
+    const deletePetId = req.body.deletePetId
+    client.query(`DELETE FROM pets WHERE petid = ${deletePetId}`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
+    })
+    client.end;
+})

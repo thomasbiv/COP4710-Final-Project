@@ -52,6 +52,9 @@ function App() {
   const [coatLength, setPetCoatLength] = useState("")
   const [fixed, setPetFixed] = useState(false)
 
+  //delete pet
+  const[deletePetId, setDeletePetId] = useState(0)
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -115,6 +118,13 @@ function App() {
 
   const addPet = () => {
     axios.post("http://localhost:4000/addPet", {pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed}).then((response) => {
+    if(response.data.message === "success")  
+      setBtnToggle(5)
+    })
+  }
+
+  const deletePet = () => {
+    axios.post("http://localhost:4000/deletePet", {deletePetId: deletePetId}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
     })
@@ -191,6 +201,7 @@ function App() {
         <br/>
         <Button title = 'Add New Pet' onClick = {() => setBtnToggle(6)}/>
         <Button title = 'Facilitate Adoption' onClick = {() => setBtnToggle(7)}/>
+        <Button title = 'Remove a Pet' onClick = {() => setBtnToggle(8)}/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
         <br/>
         <br/>
@@ -267,6 +278,17 @@ function App() {
             <br/>
             <button className = "btn" onClick={facilitateAdoption}> Complete Adoption </button>
             </div>
+          <br/>
+          <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
+          <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+          </div>
+        : btnToggle === 8
+        ? <div className="form-box">
+          <label>Remove a Pet</label>
+          <br/>
+          <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setDeletePetId(e.target.value)}}/>
+          <br/>
+          <button className = "btn" onClick={deletePet}> Delete </button>
           <br/>
           <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
           <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
