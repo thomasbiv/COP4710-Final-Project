@@ -216,7 +216,7 @@ function App() {
             <br />
             <input type="text" placeholder="Weight (lbs)" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPetWeight(e.target.value)}}/>
             <br/>
-            <input type="text" placeholder="Sex (M/F)" onChange={(e) => {setPetSex(e.target.value)}}/>
+            <input type="text" maxLength = "1" placeholder="Sex (M/F)" onKeyPress={(e) => {if(!(/M/.test(e.key) || /F/.test(e.key)|| /f/.test(e.key)|| /m/.test(e.key))) { e.preventDefault()}}} onChange={(e) => {setPetSex(e.target.value)}}/>
             <br />
             <label>Rescued On</label>
             <br/>
