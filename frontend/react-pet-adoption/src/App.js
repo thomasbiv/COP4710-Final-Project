@@ -71,6 +71,9 @@ function App() {
   const [medications, setMeds] = useState("")
   const [extracareneeded, setECN] = useState(false)
 
+  //delete medical condition
+  const [deleteMedPetID, setDeleteMedPetID] = useState(0)
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -142,6 +145,13 @@ function App() {
   const addMedicalCondition = () => {
     axios.post("http://localhost:4000/addMedicalCondition", {issue: issue, pet: pet, medications: medications, extracareneeded: extracareneeded}).then((response) => {
       if(response.data.message === "success")
+        setBtnToggle(5)
+    })
+  }
+
+  const deleteMedCondition = () => {
+    axios.post("http://localhost:4000/deleteMedCondition", {deleteMedPetID: deleteMedPetID}).then((response) => {
+      if (response.data.message === "success")
         setBtnToggle(5)
     })
   }
@@ -302,6 +312,7 @@ function App() {
         <Button title = 'Facilitate Adoption' onClick = {() => setBtnToggle(7)}/>
         <Button title = 'Remove a Pet' onClick = {() => setBtnToggle(8)}/>
         <Button title = 'Add a Medical Condition' onClick = {() => setBtnToggle(12)}/>
+        <Button title = 'Remove a Medical Condition' onClick = {() => setBtnToggle(13)}/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
         <br/>
         <br/>
@@ -415,6 +426,17 @@ function App() {
           <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
           <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
           </div>
+          : btnToggle === 13
+          ? <div className="form-box">
+            <label>Remove a Medical Condition</label>
+            <br/>
+            <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setDeleteMedPetID(e.target.value)}}/>
+            <br/>
+            <button className = "btn" onClick={deleteMedCondition}> Remove </button>
+            <br/>
+            <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
+            <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+            </div>
         : <div>
             <div className="form-box">
             <label>Welcome Employee!</label>

@@ -204,3 +204,15 @@ app.post("/addMedicalCondition", (req, res) => {
     })
     client.end;
 })
+
+app.post("/deleteMedCondition", (req, res) => {
+    const deleteMedPetID = req.body.deleteMedPetID
+    client.query(`DELETE FROM MedicalIssues WHERE pet = ${deleteMedPetID}`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
+    })
+    client.end;
+})
