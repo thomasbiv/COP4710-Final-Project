@@ -73,6 +73,7 @@ function App() {
 
   //delete medical condition
   const [deleteMedPetID, setDeleteMedPetID] = useState(0)
+  const [deleteMedIssue, setDeleteMedIssue] = useState("")
 
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -150,7 +151,7 @@ function App() {
   }
 
   const deleteMedCondition = () => {
-    axios.post("http://localhost:4000/deleteMedCondition", {deleteMedPetID: deleteMedPetID}).then((response) => {
+    axios.post("http://localhost:4000/deleteMedCondition", {deleteMedPetID: deleteMedPetID, deleteMedIssue: deleteMedIssue}).then((response) => {
       if (response.data.message === "success")
         setBtnToggle(5)
     })
@@ -435,6 +436,9 @@ function App() {
             <br/>
             <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setDeleteMedPetID(e.target.value)}}/>
             <br/>
+            <br />
+            <input type="text" placeholder="Issue" onChange={(e) => {setDeleteMedIssue(e.target.value)}}/>
+            <br />
             <button className = "btn" onClick={deleteMedCondition}> Remove </button>
             <br/>
             <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>

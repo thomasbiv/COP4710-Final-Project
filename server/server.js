@@ -209,7 +209,8 @@ app.post("/addMedicalCondition", (req, res) => {
 
 app.post("/deleteMedCondition", (req, res) => {
     const deleteMedPetID = req.body.deleteMedPetID
-    client.query(`DELETE FROM MedicalIssues WHERE pet = ${deleteMedPetID}`,
+    const deleteMedIssue = req.body.deleteMedIssue
+    client.query(`DELETE FROM MedicalIssues WHERE pet = ${deleteMedPetID} AND issue = '${deleteMedIssue}'`,
     (err, result) => {
         if(err)
         console.log(err.message)
