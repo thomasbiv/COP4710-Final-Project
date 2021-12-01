@@ -222,7 +222,7 @@ function App() {
         <br/>
         <br/>
         {displayCustomerView.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -240,7 +240,7 @@ function App() {
         <br/>
         <br/>
         {filterByAge.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -258,7 +258,7 @@ function App() {
         <br/>
         <br/>
         {filterCats.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Declawed: {val.declawed ? "Yes" : "No"} <hr className = "hr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -276,7 +276,7 @@ function App() {
         <br/>
         <br/>
         {filterDogs.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Housetrained: {val.housetrained ? "Yes" : "No"} <hr className = "hr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
