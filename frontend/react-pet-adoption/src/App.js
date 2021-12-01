@@ -43,14 +43,14 @@ function App() {
   const [name, setPetName] = useState("")
   const [color, setPetColor] = useState("")
   const [sex, setPetSex] = useState()
-  const [mChipped, setPetMchipped] = useState(false)
+  const [mChipped, setPetMchipped] = useState(true)
   const [breed, setPetBreed] = useState("")
-  const [shots, setPetShots] = useState(false)
+  const [shots, setPetShots] = useState(true)
   const [weight, setPetWeight] = useState(0)
   const [rescDate, setPetRescDate] = useState(new Date())
   const [estDOB, setPetEstDOB] = useState(new Date())
-  const [coatLength, setPetCoatLength] = useState("")
-  const [fixed, setPetFixed] = useState(false)
+  const [coatLength, setPetCoatLength] = useState("short")
+  const [fixed, setPetFixed] = useState(true)
 
   //delete pet
   const[deletePetId, setDeletePetId] = useState(0)
@@ -347,31 +347,34 @@ function App() {
             <label>Estimated DOB</label>
             <br/>
             <input type="date" onChange={(e) => {setPetEstDOB(e.target.value)}}/>
-            <br />
-            <label>MicroChipped</label>
-            <select>
-              <option value="true" onChange={(e) => setPetMchipped(e.target.value)}>Yes</option>
-              <option value="false" onChange={(e) => setPetMchipped(e.target.value)}>No</option>
+            <br/>
+            <label>MicroChipped: </label>
+            <select onChange={(e) => setPetMchipped(e.target.value)}>
+              <option type = "bool" value="true">Yes</option>
+              <option type = "bool" value="false">No</option>
             </select>
             <br />
-            <label>Shots Received</label>
-            <select>
-              <option value="true" onChange={(e) => setPetShots(e.target.value)}>Yes</option>
-              <option value="false" onChange={(e) => setPetShots(e.target.value)}>No</option>
+            <label>Shots Received: </label>
+            <select onChange={(e) => setPetShots(e.target.value)}>
+              <option type = "bool" value="true" >Yes</option>
+              <option type = "bool" value="false">No</option>
             </select>
             <br />
-            <label>Fixed</label>
-            <select>
-              <option value="true" onChange={(e) => setPetFixed(e.target.value)}>Yes</option>
-              <option value="false" onChange={(e) => setPetFixed(e.target.value)}>No</option>
+            <label>Fixed: </label>
+            <select onChange={(e) => setPetFixed(e.target.value)}>
+              <option type = "bool" value="true" >Yes</option>
+              <option type = "bool" value="false">No</option>
             </select>
             <br />
-            <label>Coat Length</label>
-            <select>
-              <option value="short" onChange={(e) => setPetCoatLength(e.target.value)}>Short</option>
-              <option value="medium" onChange={(e) => setPetCoatLength(e.target.value)}>Medium</option>
-              <option value="long" onChange={(e) => setPetCoatLength(e.target.value)}>Long</option>
+            <label>Coat Length: </label>
+            <select onChange={(e) => setPetCoatLength(e.target.value)}>
+              <option type = "text" value="short" >Short</option>
+              <option type = "text" value="medium" >Medium</option>
+              <option type = "text" value="long">Long</option>
             </select>
+            <br/>
+            <label>Is it a dog or a cat?</label>
+
             <br />
             <button className = "btn" onClick={addPet}> Add Pet </button>
             </div>
