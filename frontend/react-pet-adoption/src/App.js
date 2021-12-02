@@ -101,6 +101,8 @@ function App() {
     axios.post("http://localhost:4000/customerRegister", {regCustomerId: regCustomerId, firstName: firstName, lastName: lastName, phone: phone, email: email, address: address, regPassword: regPassword}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(4)
+    else 
+    alert("There was an error, please try again.")
     })
   }
 
@@ -135,6 +137,8 @@ function App() {
     axios.post("http://localhost:4000/facilitateAdoption", {petId: petId, adoptCustId: adoptCustId}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
+    else
+      alert("There was an error, please try again.")
     })
   }
 
@@ -142,6 +146,8 @@ function App() {
     axios.post("http://localhost:4000/addPet", {pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed, houseTrained: houseTrained, declawed: declawed}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
+    else
+      alert("There was an error, please try again, make sure you enter a unique pet ID")
     })
   }
 
@@ -149,6 +155,8 @@ function App() {
     axios.post("http://localhost:4000/addMedicalCondition", {issue: issue, pet: pet, medications: medications, extracareneeded: extracareneeded}).then((response) => {
       if(response.data.message === "success")
         setBtnToggle(5)
+      else
+        alert("There was an error, please try again.")
     })
   }
 
@@ -156,6 +164,8 @@ function App() {
     axios.post("http://localhost:4000/deleteMedCondition", {deleteMedPetID: deleteMedPetID, deleteMedIssue: deleteMedIssue}).then((response) => {
       if (response.data.message === "success")
         setBtnToggle(5)
+      else
+        alert("There was an error, please try again.")
     })
   }
 
@@ -163,6 +173,8 @@ function App() {
     axios.post("http://localhost:4000/deletePet", {deletePetId: deletePetId}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
+    else
+      alert("There was an error, please try again.")
     })
   }
   useEffect(() => {//filtered by age

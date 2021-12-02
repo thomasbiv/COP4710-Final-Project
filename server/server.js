@@ -44,7 +44,7 @@ app.post("/customerRegister", (req, res) => {
     client.query(`INSERT INTO customer (customerid, firstname, lastname, email, phone, address, "password") VALUES (${regCustomerId}, '${firstName}', '${lastName}', '${email}', '${phone}', '${address}' , '${password}')`,
     (err, result) => {
         if(err)
-        console.log(err.message)
+            res.send(err.message)
         else
             res.send({message: "success"})
     })
@@ -76,7 +76,7 @@ app.get("/customerView", (req, res) => {
     (err, result) => {
         if(err) 
         {
-            console.log(err)
+            res.send(err.message)
         } else 
         {
             res.send(result.rows)
@@ -91,7 +91,7 @@ app.get("/employeeView", (req, res) => {
     (err, result) => {
         if(err) 
         {
-            console.log(err)
+            res.send(err.message)
         } else 
         {
             res.send(result.rows)
@@ -106,7 +106,7 @@ app.post("/facilitateAdoption", (req, res) => {
     client.query(`UPDATE pets SET status = 'Adopted', adoptedby = ${adoptCustId}, adoptiondate = NOW() WHERE petid = ${petId}`,
     (err, result) => {
         if(err)
-        console.log(err.message)
+            res.send(err.message)
         else
             res.send({message: "success"})
     })
@@ -131,9 +131,8 @@ app.post("/addPet", (req, res) => {
     client.query(`CALL stoInsertPet (${pID}, '${name}', '${color}', 'Available', '${sex}', ${mChipped}, '${breed}', ${shots}, ${weight},'${rescDate}', '${estDOB}', '${coatLength}', ${fixed}, NULL, NULL, ${declawed}, ${houseTrained});`,
     (err, result) => {
         if(err)
-        console.log(err.message)
+            res.send(err.message)
         else
-            console.log("cool")
             res.send({message: "success"})
     })
     client.end;
@@ -144,7 +143,7 @@ app.post("/deletePet", (req, res) => {
     client.query(`DELETE FROM pets WHERE petid = ${deletePetId}`,
     (err, result) => {
         if(err)
-        console.log(err.message)
+            res.send(err.message)
         else
             res.send({message: "success"})
     })
@@ -156,7 +155,7 @@ app.get("/filterByAge", (req, res) => {
     (err, result) => {
         if(err) 
         {
-            console.log(err)
+            res.send(err.message)
         } else 
         {
             res.send(result.rows)
@@ -170,7 +169,7 @@ app.get("/filterCats", (req, res) => {
     (err, result) => {
         if(err) 
         {
-            console.log(err)
+            res.send(err.message)
         } else 
         {
             res.send(result.rows)
@@ -184,7 +183,7 @@ app.get("/filterDogs", (req, res) => {
     (err, result) => {
         if(err) 
         {
-            console.log(err)
+            res.send(err.message)
         } else 
         {
             res.send(result.rows)
@@ -201,7 +200,7 @@ app.post("/addMedicalCondition", (req, res) => {
     client.query(`INSERT INTO MedicalIssues(issue, pet, medications, extracareneeded) VALUES ('${issue}', ${pet}, '${medications}', ${extracareneeded})`,
     (err, result) => {
         if(err)
-        console.log(err.message)
+            res.send(err.message)
         else
             res.send({message: "success"})
     })
@@ -214,7 +213,7 @@ app.post("/deleteMedCondition", (req, res) => {
     client.query(`DELETE FROM MedicalIssues WHERE pet = ${deleteMedPetID} AND issue = '${deleteMedIssue}'`,
     (err, result) => {
         if(err)
-        console.log(err.message)
+            res.send(err.message)
         else
             res.send({message: "success"})
     })
