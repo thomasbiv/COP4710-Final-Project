@@ -51,6 +51,8 @@ function App() {
   const [estDOB, setPetEstDOB] = useState(new Date())
   const [coatLength, setPetCoatLength] = useState("short")
   const [fixed, setPetFixed] = useState(true)
+  const [houseTrained, setHousetrained] = useState(null)
+  const [declawed, setDeclawed] = useState(null)
 
   //delete pet
   const[deletePetId, setDeletePetId] = useState(0)
@@ -137,7 +139,7 @@ function App() {
   }
 
   const addPet = () => {
-    axios.post("http://localhost:4000/addPet", {pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed}).then((response) => {
+    axios.post("http://localhost:4000/addPet", {pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed, houseTrained: houseTrained, declawed: declawed}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
     })
@@ -199,7 +201,7 @@ function App() {
             <br/>
             <input type="text" placeholder="Customer ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setCustomerId(e.target.value)}}/>
             <br/>
-            <input type={passwordShown ? "tex" : "password"} placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
+            <input type={passwordShown ? "text" : "password"} placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
             <br/>
             <button onClick={togglePassword} className = "btn"> Show Password</button>
             <br/>
@@ -374,9 +376,20 @@ function App() {
               <option type = "text" value="long">Long</option>
             </select>
             <br/>
-            <label>Is it a dog or a cat?</label>
-
-            <br />
+            <label>If it is a dog is it housetrained?</label>
+            <select onChange={(e) => setHousetrained(e.target.value)}>
+              <option  value="NULL" >Select</option>
+              <option  value="true" >Yes</option>
+              <option  value="false" >No</option>
+            </select>
+            <br/>
+            <label>If it is a cat is it declawed?</label>
+            <select onChange={(e) => setDeclawed(e.target.value)}>
+              <option  value="NULL" >Select</option>
+              <option  value="true" >Yes</option>
+              <option  value="false" >No</option>
+            </select>
+            <br/>
             <button className = "btn" onClick={addPet}> Add Pet </button>
             </div>
           <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
@@ -450,7 +463,7 @@ function App() {
             <br/>
             <input type="text" placeholder="Employee ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setEmpId(e.target.value)}}/>
             <br/>
-            <input type={passwordShown ? "tex" : "password"} placeholder="Password" onChange={(e) => {setEmpPassword(e.target.value)}}/>
+            <input type={passwordShown ? "text" : "password"} placeholder="Password" onChange={(e) => {setEmpPassword(e.target.value)}}/>
             <br/>
             <button onClick={togglePassword} className = "btn"> Show Password</button>
             <br/>

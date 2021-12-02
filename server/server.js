@@ -127,12 +127,13 @@ app.post("/addPet", (req, res) => {
     const coatLength = req.body.coatLength
     const fixed = req.body.fixed
     const declawed = req.body.declawed
-    const housetrained = req.body.declawed
-    client.query(`INSERT INTO Pets(petid, "name", status, color, sex, mchipped, breed, shots, weight, rescdate, estdob, coatlength, fixed) VALUES(${pID}, '${name}', 'Available', '${color}', '${sex}', ${mChipped}, '${breed}', ${shots}, ${weight},'${rescDate}', '${estDOB}', '${coatLength}', ${fixed});`,
+    const houseTrained = req.body.houseTrained
+    client.query(`CALL stoInsertPet (${pID}, '${name}', '${color}', 'Available', '${sex}', ${mChipped}, '${breed}', ${shots}, ${weight},'${rescDate}', '${estDOB}', '${coatLength}', ${fixed}, NULL, NULL, ${declawed}, ${houseTrained});`,
     (err, result) => {
         if(err)
         console.log(err.message)
         else
+            console.log("cool")
             res.send({message: "success"})
     })
     client.end;
