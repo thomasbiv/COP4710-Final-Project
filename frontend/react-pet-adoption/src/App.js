@@ -38,7 +38,7 @@ function App() {
   const [petId, setPetId] = useState()
   const [adoptCustId, setAdoptCustId] = useState()
 
-  //add a new pet ; status is set to 'available' when inserting to table
+  //add a new pet : status is set to 'available' when inserting to table
   const [pID, setPetPID] = useState(0)
   const [name, setPetName] = useState("")
   const [color, setPetColor] = useState("")
@@ -76,6 +76,10 @@ function App() {
   //delete medical condition
   const [deleteMedPetID, setDeleteMedPetID] = useState(0)
   const [deleteMedIssue, setDeleteMedIssue] = useState("")
+
+  //facilitate foster
+  const [fosterPetID, setFosterPetID] = useState()
+  const [fosterCID, setFosterCID] = useState()
 
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -187,6 +191,17 @@ function App() {
       alert("There was an error, please try again.")
     })
   }
+
+  const facilitateFoster = () => {
+    axios.post("http://localhost:4000/facilitateFoster", {fosterPetID: fosterPetID, fosterCID: fosterCID}).then((response) => {
+    if(response.data.message === "success") {  
+      setBtnToggle(5)
+    }
+    else
+      alert("There was an error, please try again. Make sure the pet selected is not already adopted!")
+    })
+  }
+
   useEffect(() => {//filtered by age
     axios.get("http://localhost:4000/filterByAge", {}).then((response) => {
       setFilterByAge(response.data)
@@ -338,8 +353,8 @@ function App() {
         <Button title = 'Remove a Pet' onClick = {() => setBtnToggle(8)}/>
         <Button title = 'Add a Medical Condition' onClick = {() => setBtnToggle(12)}/>
         <Button title = 'Remove a Medical Condition' onClick = {() => setBtnToggle(13)}/>
+        <Button title = 'Facilitate Foster' onClick = {() => setBtnToggle(14)}/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
-        <br/>
         <br/>
         {displayEmployeeView.map((val) => {
           if (val.status === "available" || val.status === "Available")
@@ -483,6 +498,21 @@ function App() {
             <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
             <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
             </div>
+        : btnToggle === 14
+        ? <div>
+          <div className="form-box">
+            <label>Facilitate a Foster</label>
+            <br/>
+            <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setFosterPetID(e.target.value)}}/>
+            <br/>
+            <input type="text" placeholder="Customer ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setFosterCID(e.target.value)}}/>
+            <br/>
+            <button className = "btn" onClick={facilitateFoster}> Complete Foster </button>
+            </div>
+          <br/>
+          <Button title = 'Back' onClick = {() => setBtnToggle(5)}/>
+          <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
+          </div>
         : <div>
             <div className="form-box">
             <label>Welcome Employee!</label>
