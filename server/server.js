@@ -219,3 +219,16 @@ app.post("/deleteMedCondition", (req, res) => {
     })
     client.end;
 })
+
+app.post("/facilitateFoster", (req, res) => {
+    const fosterPetID = req.body.fosterPetID
+    const fosterCID = req.body.fosterCID
+    client.query(`CALL addFoster(${fosterPetID}, ${fosterCID})`,
+    (err, result) => {
+        if(err)
+        console.log(err.message)
+        else
+            res.send({message: "success"})
+    })
+    client.end;
+})
