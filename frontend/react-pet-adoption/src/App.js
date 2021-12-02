@@ -82,6 +82,16 @@ function App() {
     setPasswordShown(!passwordShown);
   }
 
+  const [lockCats, setLockCats] = useState(false);
+  const toggleLockCats = () => {
+    setLockCats(!lockCats);
+  }
+
+  const [lockDogs, setLockDogs] = useState(false);
+  const toggleLockDogs = () => {
+    setLockDogs(!lockDogs);
+  }
+
   const login = async () => {
     setLoginStatus(null)
     if(customerId )
@@ -388,15 +398,19 @@ function App() {
               <option type = "text" value="long">Long</option>
             </select>
             <br/>
+            <label>Is It a dog or a cat?</label>
+            <button disabled= {lockCats ? "disabled" : ""} onClick={toggleLockDogs} className = "btn"> Cat</button>
+            <button disabled= {lockDogs ? "disabled" : ""} onClick={toggleLockCats} className = "btn"> Dog</button>
+            <br/>
             <label>If it is a dog is it housetrained?</label>
-            <select onChange={(e) => setHousetrained(e.target.value)}>
+            <select disabled= {lockCats ? "" : "disabled"} onChange={(e) => setHousetrained(e.target.value)}>
               <option  value="NULL" >Select</option>
               <option  value="true" >Yes</option>
               <option  value="false" >No</option>
             </select>
             <br/>
             <label>If it is a cat is it declawed?</label>
-            <select onChange={(e) => setDeclawed(e.target.value)}>
+            <select disabled= {lockDogs ? "" : "disabled"}onChange={(e) => setDeclawed(e.target.value)}>
               <option  value="NULL" >Select</option>
               <option  value="true" >Yes</option>
               <option  value="false" >No</option>
