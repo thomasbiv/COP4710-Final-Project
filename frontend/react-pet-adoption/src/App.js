@@ -175,7 +175,7 @@ function App() {
       if (response.data.message === "success")
         setBtnToggle(5)
       else
-        alert("There was an error, please try again.")
+        alert("There was an error, please try again, make sure you spelled it correctly and have the correct pet ID.")
     })
   }
 
