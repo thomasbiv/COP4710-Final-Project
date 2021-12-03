@@ -158,7 +158,7 @@ function App() {
   }
 
   const addPet = () => {
-    axios.post("http://localhost:4000/addPet", {employeeId: employeeID, pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed, houseTrained: houseTrained, declawed: declawed}).then((response) => {
+    axios.post("http://localhost:4000/addPet", {employeeID: employeeID, pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed, houseTrained: houseTrained, declawed: declawed}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
     else

@@ -114,7 +114,7 @@ app.post("/facilitateAdoption", (req, res) => {
 })
 
 app.post("/addPet", (req, res) => {
-    const eID = req.body.eID
+    const employeeID = req.body.employeeID
     const pID = req.body.pId
     const name = req.body.name
     const color = req.body.color
@@ -129,7 +129,7 @@ app.post("/addPet", (req, res) => {
     const fixed = req.body.fixed
     const declawed = req.body.declawed
     const houseTrained = req.body.houseTrained
-    client.query(`CALL stoInsertPet (${eID}, ${pID}, '${name}', '${color}', 'Available', '${sex}', ${mChipped}, '${breed}', ${shots}, ${weight},'${rescDate}', '${estDOB}', '${coatLength}', ${fixed}, NULL, NULL, ${declawed}, ${houseTrained});`,
+    client.query(`CALL stoInsertPet (${employeeID}, ${pID}, '${name}', '${color}', 'Available', '${sex}', ${mChipped}, '${breed}', ${shots}, ${weight},'${rescDate}', '${estDOB}', '${coatLength}', ${fixed}, NULL, NULL, ${declawed}, ${houseTrained});`,
     (err, result) => {
         if(err)
             res.send(err.message)
