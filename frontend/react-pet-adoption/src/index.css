@@ -20,9 +20,20 @@ body {
     font-family: inherit;
   }
 
-  .hr {
+  .employeeHr {
     color: black;
-    width: 90%;
+    width: 95%;
+    background-color: black;
+    height: 3px;
+    border-color: black;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .customerHr {
+    color: black;
+    width: 80%;
     background-color: black;
     height: 3px;
     border-color: black;

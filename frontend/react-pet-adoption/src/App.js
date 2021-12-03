@@ -286,7 +286,7 @@ function App() {
         <br/>
         <br/>
         {displayCustomerView.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "customerHr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -304,7 +304,7 @@ function App() {
         <br/>
         <br/>
         {filterByAge.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "customerHr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -322,7 +322,7 @@ function App() {
         <br/>
         <br/>
         {filterCats.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Declawed: {val.declawed ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Declawed: {val.declawed ? "Yes" : "No"} <hr className = "customerHr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -340,7 +340,7 @@ function App() {
         <br/>
         <br/>
         {filterDogs.map((val) => {
-            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Housetrained: {val.housetrained ? "Yes" : "No"} <hr className = "hr"/></h4>
+            return <h4 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microchipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Housetrained: {val.housetrained ? "Yes" : "No"} <hr className = "customerHr"/></h4>
         })}
         <br/>
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
@@ -358,10 +358,13 @@ function App() {
         <Button title = 'Log Out' onClick = {() => setBtnToggle(0)}/>
         <br/>
         {displayEmployeeView.map((val) => {
-          if (val.status === "available" || val.status === "Available")
-            return <h5 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "hr"/></h5>
-          else 
-            return <h5 className = "leftAlign"> Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Adopted By: {val.adoptedby} | Adoption Date: {val.adoptmonth}-{val.adoptday}-{val.adoptyear} <hr className = "hr"/></h5>
+          if (val.status === "adopted" || val.status === "Adopted" )
+            return <h5 className = "leftAlign">Pet ID: {val.petid} Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Adopted By: {val.adoptedby} | Adoption Date: {val.adoptmonth}-{val.adoptday}-{val.adoptyear} <hr className = "employeeHr"/></h5>
+          else if(val.status === "fostered" || val.status === "Fostered")
+            return <h5 className = "leftAlign">Pet ID: {val.petid} Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} | Fostered By: {val.fosteredby} | Fostered From: {val.frommonth}-{val.fromday}-{val.fromyear} | Fostered Until: {val.untilmonth}-{val.untilday}-{val.untilyear}<hr className = "employeeHr"/></h5>
+          else
+            return <h5 className = "leftAlign">Pet ID: {val.petid} Name: {val.name} | Sex: {val.sex} | Age: {val.age} | Status: {val.status} | Breed: {val.breed} | Color: {val.color}  | Coat Length: {val.coatlength} | Weight: {val.weight} lbs. | Up to Date on shots: {val.shots ? "Yes" : "No"} | Microshipped: {val.mchipped ? "Yes" : "No"} | Fixed: {val.fixed ? "Yes" : "No"} <hr className = "employeeHr"/></h5>
+            
         })}
         </div>
         : btnToggle === 6
