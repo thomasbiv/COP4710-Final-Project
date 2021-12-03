@@ -51,6 +51,63 @@ app.post("/customerRegister", (req, res) => {
     client.end;
 })
 
+app.get("/customerView", (req, res) => {
+    client.query(`SELECT * FROM customerView`,
+    (err, result) => {
+        if(err) 
+        {
+            res.send(err.message)
+        } else 
+        {
+            res.send(result.rows)
+        }
+
+    })
+    client.end;
+})
+
+app.get("/filterByAge", (req, res) => {
+    client.query(`SELECT * FROM customerView ORDER BY age asc`,
+    (err, result) => {
+        if(err) 
+        {
+            res.send(err.message)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
+
+app.get("/filterCats", (req, res) => {
+    client.query(`SELECT * FROM customerView, cats  WHERE customerView.petid = cats.petid`,
+    (err, result) => {
+        if(err) 
+        {
+            res.send(err.message)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
+
+app.get("/filterDogs", (req, res) => {
+    client.query(`SELECT * FROM customerView, dogs WHERE customerView.petid = dogs.petid`,
+    (err, result) => {
+        if(err) 
+        {
+            res.send(err.message)
+        } else 
+        {
+            res.send(result.rows)
+        }
+    })
+    client.end;
+})
+
 app.post("/employeeLogin", (req, res) => {
     const empId = req.body.empId
     const empPassword = req.body.empPassword
@@ -67,21 +124,6 @@ app.post("/employeeLogin", (req, res) => {
             res.send({message: "incorrect"})
         }
         
-    })
-    client.end;
-})
-
-app.get("/customerView", (req, res) => {
-    client.query(`SELECT * FROM customerView`,
-    (err, result) => {
-        if(err) 
-        {
-            res.send(err.message)
-        } else 
-        {
-            res.send(result.rows)
-        }
-
     })
     client.end;
 })
@@ -147,48 +189,6 @@ app.post("/deletePet", (req, res) => {
             res.send(err.message)
         else
             res.send({message: "success"})
-    })
-    client.end;
-})
-
-app.get("/filterByAge", (req, res) => {
-    client.query(`SELECT * FROM customerView ORDER BY age asc`,
-    (err, result) => {
-        if(err) 
-        {
-            res.send(err.message)
-        } else 
-        {
-            res.send(result.rows)
-        }
-    })
-    client.end;
-})
-
-app.get("/filterCats", (req, res) => {
-    client.query(`SELECT * FROM customerView, cats  WHERE customerView.petid = cats.petid`,
-    (err, result) => {
-        if(err) 
-        {
-            res.send(err.message)
-        } else 
-        {
-            res.send(result.rows)
-        }
-    })
-    client.end;
-})
-
-app.get("/filterDogs", (req, res) => {
-    client.query(`SELECT * FROM customerView, dogs WHERE customerView.petid = dogs.petid`,
-    (err, result) => {
-        if(err) 
-        {
-            res.send(err.message)
-        } else 
-        {
-            res.send(result.rows)
-        }
     })
     client.end;
 })
