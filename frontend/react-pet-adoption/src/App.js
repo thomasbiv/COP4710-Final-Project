@@ -39,6 +39,7 @@ function App() {
   const [adoptCustId, setAdoptCustId] = useState()
 
   //add a new pet : status is set to 'available' when inserting to table
+  const [employeeID, setEmployeeID] = useState(0)
   const [pID, setPetPID] = useState(0)
   const [name, setPetName] = useState("")
   const [color, setPetColor] = useState("")
@@ -157,11 +158,11 @@ function App() {
   }
 
   const addPet = () => {
-    axios.post("http://localhost:4000/addPet", {pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed, houseTrained: houseTrained, declawed: declawed}).then((response) => {
+    axios.post("http://localhost:4000/addPet", {employeeId: employeeID, pId: pID, name: name, color: color, sex: sex, mChipped: mChipped, breed: breed, shots:shots, weight: weight, rescDate: rescDate, estDOB: estDOB, coatLength: coatLength, fixed: fixed, houseTrained: houseTrained, declawed: declawed}).then((response) => {
     if(response.data.message === "success")  
       setBtnToggle(5)
     else
-      alert("There was an error, please try again, make sure you enter a unique pet ID")
+      alert("There was an error, please try again, make sure you enter a unique pet ID \n Must be a full time employee to add a pet")
     })
   }
 
@@ -368,6 +369,9 @@ function App() {
           <div className="form-box">
             <label>Add a new pet</label>
             <br />
+            <label>Must be a Full-Time Employee to Add a Pet</label>
+            <input type="text" placeholder="Employee ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setEmployeeID(e.target.value)}}/>
+            <br/>
             <input type="text" placeholder="Pet ID" onKeyPress={(e) => { if(!/[0-9]/.test(e.key)) { e.preventDefault()}}} onChange={(e) => {setPetPID(e.target.value)}}/>
             <br/>
             <input type="text" placeholder="Pet Name" onChange={(e) => {setPetName(e.target.value)}}/>
