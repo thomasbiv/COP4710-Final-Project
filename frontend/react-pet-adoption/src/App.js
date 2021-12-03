@@ -115,9 +115,12 @@ function App() {
   const register = () => {
     axios.post("http://localhost:4000/customerRegister", {regCustomerId: regCustomerId, firstName: firstName, lastName: lastName, phone: phone, email: email, address: address, regPassword: regPassword}).then((response) => {
     if(response.data.message === "success")  
+    {
+      setLoginStatus("Hello, " + firstName)
       setBtnToggle(4)
+    }
     else 
-    alert("There was an error, please try again.")
+      alert("There was an error, please try again.")
     })
   }
 
@@ -279,6 +282,8 @@ function App() {
         <br/>
         These are the pets that we currently have available
         <br/>
+        Call (555) 555-5555 to inquire about an animal
+        <br/>
         <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
         <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
         <Button title = 'Dogs' onClick = {() => setBtnToggle(11)}/>
@@ -296,6 +301,8 @@ function App() {
         <h1>{loginStatus}</h1>
         <br/>
         These are the pets that we currently have available
+        <br/>
+        Call (555) 555-5555 to inquire about an animal
         <br/>
         <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
         <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
@@ -315,6 +322,8 @@ function App() {
         <br/>
         These are the pets that we currently have available
         <br/>
+        Call (555) 555-5555 to inquire about an animal
+        <br/>
         <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
         <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
         <Button title = 'Dogs' onClick = {() => setBtnToggle(11)}/>
@@ -332,6 +341,8 @@ function App() {
         <h1>{loginStatus}</h1>
         <br/>
         These are the pets that we currently have available
+        <br/>
+        Call (555) 555-5555 to inquire about an animal
         <br/>
         <Button title = 'Sort by Age' onClick = {() => setBtnToggle(9)}/>
         <Button title = 'Cats' onClick = {() => setBtnToggle(10)}/>
