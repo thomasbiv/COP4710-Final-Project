@@ -1,5 +1,5 @@
 # COP4710-Final-Project
-
+*Mock Pet Adoption service website*
 
 **Developers**
 - Thomas Bivins
